@@ -6,6 +6,7 @@ workflow Mapping {
     String sample
     String library
     String readgroup
+    String? platform = "illumina"
     File inputR1
     File? inputR2
 
@@ -14,7 +15,7 @@ workflow Mapping {
             inputR1 = inputR1,
             inputR2 = inputR2,
             outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
-            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}"
+            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}"
     }
 
     call samtools.Index as samtoolsIndex {
