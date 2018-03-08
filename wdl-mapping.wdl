@@ -8,13 +8,11 @@ workflow Mapping {
     String readgroup
     File inputR1
     File? inputR2
-    String referenceFasta
 
     call bwa.BwaMem as bwaMem {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
-            referenceFasta = referenceFasta,
             outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
             readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}"
     }
