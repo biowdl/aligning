@@ -1,5 +1,5 @@
-import "wdl-tasks/bwa.wdl" as bwa
-import "wdl-tasks/samtools.wdl" as samtools
+import "tasks/bwa.wdl" as bwa
+import "tasks/samtools.wdl" as samtools
 
 workflow Mapping {
     String outputDir
