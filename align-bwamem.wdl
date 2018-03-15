@@ -1,7 +1,7 @@
 import "tasks/bwa.wdl" as bwa
 import "tasks/samtools.wdl" as samtools
 
-workflow Mapping {
+workflow AlignBwaMem {
     String outputDir
     String sample
     String library
