@@ -1,26 +1,20 @@
-import "tasks/star.wdl" as star_task
-import "tasks/samtools.wdl" as samtools
+import "../tasks/star.wdl" as star_task
+import "../tasks/samtools.wdl" as samtools
 
 workflow Mapping {
-    String? preCommand = ""
-    File inputR1
-    File? inputR2
+    Array[File] inputR1
+    Array[File]? inputR2
     String outputDir
     String sample
     String library
-    String readgroup
-    String? platform = "illumina"
+    Array[String] rgLine
 
     call star_task.Star as star {
         input:
-            preCommand = "source activate /exports/sasc/dcats/snakemake/.conda/aa42d56d",
             inputR1 = inputR1,
             inputR2 = inputR2,
-            outFileNamePrefix = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
-            outSAMattrRGline = "\"ID:" + readgroup +
-                "\" \"LB:" + library +
-                "\" \"PU:" + platform +
-                "\" \"SM:" + sample + "\""
+            outFileNamePrefix = outputDir + sample + "-" + library + ".",
+            outSAMattrRGline = rgLine
     }
 
     call samtools.Index as samtoolsIndex {
@@ -33,3 +27,4 @@ workflow Mapping {
         File bamIndexFile = samtoolsIndex.indexFile
     }
 }
+
