@@ -13,7 +13,7 @@ workflow AlignStar {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
-            outFileNamePrefix = outputDir + sample + "-" + library + ".",
+            outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
             outSAMattrRGline = rgLine
     }
 
