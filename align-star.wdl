@@ -1,5 +1,5 @@
-import "../tasks/star.wdl" as star_task
-import "../tasks/samtools.wdl" as samtools
+import "tasks/star.wdl" as star_task
+import "tasks/samtools.wdl" as samtools
 
 workflow Mapping {
     Array[File] inputR1
