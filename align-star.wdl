@@ -1,7 +1,7 @@
 import "tasks/star.wdl" as star_task
 import "tasks/samtools.wdl" as samtools
 
-workflow Mapping {
+workflow AlignStar {
     Array[File] inputR1
     Array[File]? inputR2
     String outputDir
