@@ -15,7 +15,7 @@ workflow AlignBwaMem {
             inputR1 = inputR1,
             inputR2 = inputR2,
             outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
-            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}"
+            readgroup = "@RG\\tID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}"
     }
 
     call samtools.Index as samtoolsIndex {
