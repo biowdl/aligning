@@ -19,7 +19,8 @@ workflow AlignStar {
 
     call samtools.Index as samtoolsIndex {
         input:
-            bamFilePath = star.bamFile
+            bamFilePath = star.bamFile,
+            bamIndexPath = star.bamFile + ".bai"
     }
 
     output {
