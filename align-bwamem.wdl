@@ -10,7 +10,7 @@ workflow AlignBwaMem {
     File inputR1
     File? inputR2
 
-    call bwa.BwaMem as bwaMem {
+    call bwa.mem as bwaMem {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
