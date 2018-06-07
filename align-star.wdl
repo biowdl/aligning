@@ -20,7 +20,8 @@ workflow AlignStar {
     call samtools.Index as samtoolsIndex {
         input:
             bamFilePath = star.bamFile,
-            bamIndexPath = star.bamFile + ".bai"
+            # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
+            bamIndexPath = outputDir + "/" + sample + "-" + library + ".Aligned.sortedByCoord.out.bai"
     }
 
     output {

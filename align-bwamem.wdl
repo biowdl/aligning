@@ -21,7 +21,7 @@ workflow AlignBwaMem {
     call samtools.Index as samtoolsIndex {
         input:
             bamFilePath = bwaMem.bamFile,
-            bamIndexPath = bwaMem.bamFile + ".bai"
+            bamIndexPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bai"
     }
 
     output {
