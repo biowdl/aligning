@@ -3,7 +3,7 @@ import "tasks/samtools.wdl" as samtools
 
 workflow AlignStar {
     Array[File] inputR1
-    Array[File]? inputR2
+    Array[File?] inputR2
     String outputDir
     String sample
     String library
@@ -19,7 +19,9 @@ workflow AlignStar {
 
     call samtools.Index as samtoolsIndex {
         input:
-            bamFilePath = star.bamFile
+            bamFilePath = star.bamFile,
+            # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
+            bamIndexPath = outputDir + "/" + sample + "-" + library + ".Aligned.sortedByCoord.out.bai"
     }
 
     output {
