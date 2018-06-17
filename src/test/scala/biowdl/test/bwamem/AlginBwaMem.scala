@@ -27,8 +27,7 @@ import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
 import nl.biopet.utils.ngs.vcf.getVcfIndexFile
 
-trait AlginBwaMem
-    extends Pipeline with Reference {
+trait AlginBwaMem extends Pipeline with Reference {
 
   def sample: Option[String]
   def library: Option[String]
@@ -44,8 +43,10 @@ trait AlginBwaMem
         "AlignBwaMem.refFasta" -> referenceFasta.getAbsolutePath,
         "AlignBwaMem.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
         "AlignBwaMem.refDict" -> referenceFastaDictFile.getAbsolutePath,
-        "AlignBwaMem.bwaMem.referenceFasta" -> bwaMemFasta.getOrElse(throw new IllegalStateException),
-        "AlignBwaMem.bwaMem.indexFiles" -> bwaMemIndexFiles.map(_.getAbsolutePath)
+        "AlignBwaMem.bwaMem.referenceFasta" -> bwaMemFasta.getOrElse(
+          throw new IllegalStateException),
+        "AlignBwaMem.bwaMem.indexFiles" -> bwaMemIndexFiles.map(
+          _.getAbsolutePath)
       ) ++
       sample.map("AlignBwaMem.sample" -> _) ++
       library.map("AlignBwaMem.library" -> _) ++

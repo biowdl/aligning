@@ -37,8 +37,13 @@ trait AlginBwaMemSingleEnd extends AlginBwaMemSuccess with TestReference {
 }
 
 trait AlginBwaMemPairedEnd extends AlginBwaMemSingleEnd {
-  override def inputR2: Option[File] = Some(fixtureFile("samples", "wgs1", "R2.fq.gz"))
+  override def inputR2: Option[File] =
+    Some(fixtureFile("samples", "wgs1", "R2.fq.gz"))
 }
 
-class AlginBwaMemSingleEndTest extends AlginBwaMemSingleEnd with AlginBwaMemSuccess
-class AlginBwaMemPairedEndTest extends AlginBwaMemPairedEnd with AlginBwaMemSuccess
+class AlginBwaMemSingleEndTest
+    extends AlginBwaMemSingleEnd
+    with AlginBwaMemSuccess
+class AlginBwaMemPairedEndTest
+    extends AlginBwaMemPairedEnd
+    with AlginBwaMemSuccess
