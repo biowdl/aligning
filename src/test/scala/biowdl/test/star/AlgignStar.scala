@@ -54,5 +54,5 @@ trait AlgignStar extends Pipeline with Reference {
       inputR1.map("AlignStar.inputR1" -> _) ++
       inputR2.map("AlignStar.inputR2" -> _)
 
-  def startFile: File = new File("./align-bwamem.wdl")
+  def startFile: File = new File("./align-star.wdl")
 }
