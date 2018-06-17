@@ -42,13 +42,11 @@ trait AlgignStar extends Pipeline with Reference {
         "AlignStar.refFasta" -> referenceFasta.getAbsolutePath,
         "AlignStar.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
         "AlignStar.refDict" -> referenceFastaDictFile.getAbsolutePath,
-        "AlignStar.bwaMem.referenceFasta" -> bwaMemFasta.getOrElse(
-          throw new IllegalStateException),
-        "AlignStar.bwaMem.indexFiles" -> bwaMemIndexFiles.map(_.getAbsolutePath)
+        "AlignStar.star.genomeDir" -> starGenomeDir.map(_.getAbsolutePath)
       ) ++
       sample.map("AlignStar.sample" -> _) ++
       library.map("AlignStar.library" -> _) ++
-      readgroups.map("AlignStar.readgroup" -> _) ++
+      readgroups.map("AlignStar.rgLine" -> _) ++
       platform.map("AlignStar.platform" -> _) ++
       sample.map("AlignStar.sample" -> _) ++
       inputR1.map("AlignStar.inputR1" -> _) ++
