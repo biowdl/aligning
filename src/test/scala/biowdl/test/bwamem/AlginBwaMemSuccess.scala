@@ -22,8 +22,14 @@
 package biowdl.test.bwamem
 
 import nl.biopet.utils.biowdl.PipelineSuccess
+import org.testng.annotations.Test
 
 trait AlginBwaMemSuccess extends AlginBwaMem with PipelineSuccess {
   addMustHaveFile(s"$sample-$library-$readgroup.bam")
   addMustHaveFile(s"$sample-$library-$readgroup.bai")
+
+  @Test
+  def testReadgroups(): Unit = {
+    ???
+  }
 }

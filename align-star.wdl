@@ -3,7 +3,7 @@ import "tasks/samtools.wdl" as samtools
 
 workflow AlignStar {
     Array[File] inputR1
-    Array[File?] inputR2
+    Array[File]? inputR2
     String outputDir
     String sample
     String library
