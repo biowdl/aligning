@@ -7,7 +7,12 @@ workflow AlignStar {
     String outputDir
     String sample
     String library
-    Array[String] rgLine
+    Array[String] readgroups
+    String? platform = "illumina"
+
+    scatter (rg in readgroups) {
+        String rgLine = "ID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}"
+    }
 
     call star_task.Star as star {
         input:
@@ -29,4 +34,3 @@ workflow AlignStar {
         File bamIndexFile = samtoolsIndex.indexFile
     }
 }
-

@@ -46,7 +46,7 @@ trait AlgignStar extends Pipeline with Reference {
       ) ++
       sample.map("AlignStar.sample" -> _) ++
       library.map("AlignStar.library" -> _) ++
-      readgroups.map("AlignStar.rgLine" -> _) ++
+      readgroups.map("AlignStar.readgroups" -> _) ++
       platform.map("AlignStar.platform" -> _) ++
       sample.map("AlignStar.sample" -> _) ++
       inputR1.map("AlignStar.inputR1" -> _) ++
