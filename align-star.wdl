@@ -12,7 +12,7 @@ workflow AlignStar {
 
     scatter (rg in readgroups) {
         String rgLine =
-            '"ID:${rg}" "LB:${library}" "PL:${default="ILLUMINA" platform}" "SM:${sample}"'
+            '"ID:${rg}" "LB:${library}" "PL:${platform}" "SM:${sample}"'
     }
 
     call star_task.Star as star {
