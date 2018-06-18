@@ -1,6 +1,6 @@
 organization := "com.github.biopet"
 organizationName := "Biowdl"
-name := "biowdl-aligning"
+name := "aligning"
 
 biopetUrlName := "aligning"
 
