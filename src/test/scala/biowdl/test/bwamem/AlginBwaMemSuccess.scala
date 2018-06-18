@@ -24,5 +24,6 @@ package biowdl.test.bwamem
 import nl.biopet.utils.biowdl.PipelineSuccess
 
 trait AlginBwaMemSuccess extends AlginBwaMem with PipelineSuccess {
-  //TODO: add tests
+  addMustHaveFile(s"$sample-$library-$readgroup.bam")
+  addMustHaveFile(s"$sample-$library-$readgroup.bai")
 }
