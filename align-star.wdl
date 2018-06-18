@@ -11,7 +11,8 @@ workflow AlignStar {
     String? platform = "illumina"
 
     scatter (rg in readgroups) {
-        String rgLine = "ID:${sample}-${library}-${rg}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}"
+        String rgLine =
+            '"ID:${rg}" "LB:${library}" "PL:${default="ILLUMINA" platform}" "SM:${sample}"'
     }
 
     call star_task.Star as star {
@@ -26,7 +27,8 @@ workflow AlignStar {
         input:
             bamFilePath = star.bamFile,
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
-            bamIndexPath = outputDir + "/" + sample + "-" + library + ".Aligned.sortedByCoord.out.bai"
+            bamIndexPath = outputDir + "/" + sample + "-" + library +
+                ".Aligned.sortedByCoord.out.bai"
     }
 
     output {
