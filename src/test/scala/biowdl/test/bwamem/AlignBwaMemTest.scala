@@ -27,7 +27,7 @@ import nl.biopet.utils.biowdl.fixtureFile
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.samples.{Wgs1PairedEnd, Wgs2PairedEnd}
 
-trait AlginBwaMemSingleEnd extends AlginBwaMemSuccess with TestReference {
+trait AlginBwaMemSingleEnd extends AlignBwaMemSuccess with TestReference {
   def sample: Option[String] = Some("wgs1")
   def library: Option[String] = Some("lib1")
   def readgroup: Option[String] = Some("rg1")
@@ -43,7 +43,7 @@ trait AlginBwaMemPairedEnd extends AlginBwaMemSingleEnd {
 
 class AlginBwaMemSingleEndTest
     extends AlginBwaMemSingleEnd
-    with AlginBwaMemSuccess
+    with AlignBwaMemSuccess
 class AlginBwaMemPairedEndTest
     extends AlginBwaMemPairedEnd
-    with AlginBwaMemSuccess
+    with AlignBwaMemSuccess
