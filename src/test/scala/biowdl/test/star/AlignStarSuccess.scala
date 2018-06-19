@@ -23,6 +23,6 @@ package biowdl.test.star
 
 import nl.biopet.utils.biowdl.PipelineSuccess
 
-trait AlignStarSuccess extends AlgignStar with PipelineSuccess {
+trait AlignStarSuccess extends AlignStar with PipelineSuccess {
   //TODO: add tests
 }

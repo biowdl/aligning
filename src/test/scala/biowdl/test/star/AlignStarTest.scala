@@ -26,7 +26,7 @@ import java.io.File
 import nl.biopet.utils.biowdl.fixtureFile
 import nl.biopet.utils.biowdl.references.TestReference
 
-trait AlgignStarSingleEnd extends AlgignStarSuccess with TestReference {
+trait AlgignStarSingleEnd extends AlignStarSuccess with TestReference {
   def sample: Option[String] = Some("wgs1")
   def library: Option[String] = Some("lib1")
   def readgroups: Option[List[String]] = Some("rg1" :: Nil)
@@ -41,5 +41,5 @@ trait AlgignStarPairedEnd extends AlgignStarSingleEnd {
     Some(fixtureFile("samples", "wgs1", "R2.fq.gz") :: Nil)
 }
 
-class AlgignStarSingleEndTest extends AlgignStarSingleEnd with AlgignStarSuccess
-class AlgignStarPairedEndTest extends AlgignStarPairedEnd with AlgignStarSuccess
+class AlgignStarSingleEndTest extends AlgignStarSingleEnd with AlignStarSuccess
+class AlgignStarPairedEndTest extends AlgignStarPairedEnd with AlignStarSuccess
