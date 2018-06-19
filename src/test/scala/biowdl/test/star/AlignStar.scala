@@ -26,7 +26,7 @@ import java.io.File
 import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
 
-trait AlgignStar extends Pipeline with Reference {
+trait AlignStar extends Pipeline with Reference {
 
   def sample: Option[String]
   def library: Option[String]

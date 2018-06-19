@@ -19,17 +19,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package biowdl.test.bwamem
+package biowdl.test.star
 
 import nl.biopet.utils.biowdl.PipelineSuccess
-import org.testng.annotations.Test
 
-trait AlginBwaMemSuccess extends AlginBwaMem with PipelineSuccess {
-  addMustHaveFile(s"$sample-$library-$readgroup.bam")
-  addMustHaveFile(s"$sample-$library-$readgroup.bai")
-
-  @Test
-  def testReadgroups(): Unit = {
-    ???
-  }
+trait AlignStarSuccess extends AlgignStar with PipelineSuccess {
+  //TODO: add tests
 }

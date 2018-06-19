@@ -7,4 +7,4 @@ channels:
 dependencies:
   - samtools==1.8
   - bwa==0.7.17
-  - star==2.6.0c
+  - star==2.5.0a

@@ -27,7 +27,7 @@ import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
 import nl.biopet.utils.ngs.vcf.getVcfIndexFile
 
-trait AlginBwaMem extends Pipeline with Reference {
+trait AlignBwaMem extends Pipeline with Reference {
 
   def sample: Option[String]
   def library: Option[String]
