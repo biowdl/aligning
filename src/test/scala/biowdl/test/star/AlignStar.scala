@@ -34,6 +34,7 @@ trait AlignStar extends Pipeline with Reference {
   def platform: Option[String] = None
   def inputR1: Option[List[File]]
   def inputR2: Option[List[File]]
+  def genomeDir: Option[File] = starGenomeDir //TODO remove this?
 
   override def inputs: Map[String, Any] =
     super.inputs ++
@@ -42,7 +43,7 @@ trait AlignStar extends Pipeline with Reference {
         "AlignStar.refFasta" -> referenceFasta.getAbsolutePath,
         "AlignStar.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
         "AlignStar.refDict" -> referenceFastaDictFile.getAbsolutePath,
-        "AlignStar.star.genomeDir" -> starGenomeDir.map(_.getAbsolutePath)
+        "AlignStar.star.genomeDir" -> genomeDir
       ) ++
       sample.map("AlignStar.sample" -> _) ++
       library.map("AlignStar.library" -> _) ++
