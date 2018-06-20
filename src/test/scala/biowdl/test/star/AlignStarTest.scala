@@ -34,10 +34,6 @@ trait AlgignStarSingleEnd extends AlignStarSuccess with TestReference {
   def inputR1: Option[List[File]] =
     Some(fixtureFile("samples", "wgs1", "R1.fq.gz") :: Nil)
   def inputR2: Option[List[File]] = None
-
-  //TODO remove this
-  override def genomeDir: Option[File] = Option(
-    new File("/exports/sasc/dcats/TestSTARIndex_2.6.0c/"))
 }
 
 trait AlgignStarPairedEnd extends AlgignStarSingleEnd {

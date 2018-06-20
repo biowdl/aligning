@@ -33,5 +33,5 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
   def testReadgroups(): Unit = {
     ???
   }
-  */
+ */
 }
