@@ -25,7 +25,6 @@ import java.io.File
 
 import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
-import nl.biopet.utils.ngs.vcf.getVcfIndexFile
 
 trait AlignBwaMem extends Pipeline with Reference {
 
