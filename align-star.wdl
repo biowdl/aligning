@@ -3,11 +3,17 @@ import "tasks/samtools.wdl" as samtools
 
 workflow AlignStar {
     Array[File] inputR1
-    Array[File?] inputR2
+    Array[File]? inputR2
     String outputDir
     String sample
     String library
-    Array[String] rgLine
+    Array[String] readgroups
+    String? platform = "illumina"
+
+    scatter (rg in readgroups) {
+        String rgLine =
+            '"ID:${rg}" "LB:${library}" "PL:${platform}" "SM:${sample}"'
+    }
 
     call star_task.Star as star {
         input:
@@ -21,7 +27,8 @@ workflow AlignStar {
         input:
             bamFilePath = star.bamFile,
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
-            bamIndexPath = outputDir + "/" + sample + "-" + library + ".Aligned.sortedByCoord.out.bai"
+            bamIndexPath = outputDir + "/" + sample + "-" + library +
+                ".Aligned.sortedByCoord.out.bai"
     }
 
     output {
@@ -29,4 +36,3 @@ workflow AlignStar {
         File bamIndexFile = samtoolsIndex.indexFile
     }
 }
-
