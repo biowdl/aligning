@@ -25,8 +25,8 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
   addMustHaveFile(
-    s"${sample.head}-${library.head}.Aligned.sortedByCoord.out.bam")
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bam")
   addMustHaveFile(
-    s"${sample.head}-${library.head}.Aligned.sortedByCoord.out.bai")
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bai")
   //TODO: add tests
 }

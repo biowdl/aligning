@@ -25,8 +25,10 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
 
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
-  addMustHaveFile(s"${sample.head}-${library.head}-${readgroup.head}.bam")
-  addMustHaveFile(s"${sample.head}-${library.head}-${readgroup.head}.bai")
+  addMustHaveFile(
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bam")
+  addMustHaveFile(
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bai")
 
   /*
   @Test
