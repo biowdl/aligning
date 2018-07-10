@@ -2,9 +2,6 @@
 layout: default
 ---
 
-> BioWDL is currently still under development and not production ready.
-> Use at own risk!
-
 This repository contains a collection of BioWDL workflows which can be used
 for aligning sequencing data. There are currently two workflows available:
 - align-bwamem.wdl: Uses BWA mem to align DNA.
