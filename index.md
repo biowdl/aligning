@@ -2,8 +2,9 @@
 layout: default
 ---
 
-This repository contains a collection of BioWDL workflows which can be used
-for aligning sequencing data. There are currently two workflows available:
+This repository contains a collection of [BioWDL](https://github.com/biowdl)
+workflows which can be used for aligning sequencing data. There are currently
+two workflows available:
 - align-bwamem.wdl: Uses BWA mem to align DNA.
 - align-star.wdl: Uses STAR to align RNA.
 
@@ -16,7 +17,7 @@ for aligning sequencing data. There are currently two workflows available:
 java -jar cromwell-<version>.jar run -i inputs.json align-bwamem.wdl.wdl
 ```
 
-The inputs json can be generated using WOMtools as described in the [WOMtools
+The inputs JSON can be generated using WOMtools as described in the [WOMtools
 documentation](http://cromwell.readthedocs.io/en/stable/WOMtool/).
 
 The primary inputs are described below, additional inputs (such as precommands)
@@ -37,7 +38,7 @@ available inputs.
 
 >All inputs have to be preceded by with `AlignBwaMem.`.
 Type is indicated according to the WDL data types: `File` should be indicators
-of file location (a string in json). Types ending in `?` indicate the input is
+of file location (a string in JSON). Types ending in `?` indicate the input is
 optional, types ending in `+` indicate they require at least one element.
 
 ### `align-star.wdl`
@@ -47,7 +48,7 @@ optional, types ending in `+` indicate they require at least one element.
 java -jar cromwell-<version>.jar run -i inputs.json align-star.wdl.wdl
 ```
 
-The inputs json can be generated using WOMtools as described in the [WOMtools
+The inputs JSON can be generated using WOMtools as described in the [WOMtools
 documentation](http://cromwell.readthedocs.io/en/stable/WOMtool/).
 
 The primary inputs are described below, additional inputs (such as precommands)
@@ -67,7 +68,7 @@ available inputs.
 
 >All inputs have to be preceded by with `AlignStar.`.
 Type is indicated according to the WDL data types: `File` should be indicators
-of file location (a string in json). Types ending in `?` indicate the input is
+of file location (a string in JSON). Types ending in `?` indicate the input is
 optional, types ending in `+` indicate they require at least one element.
 
 ## Output
@@ -79,7 +80,7 @@ A directory containing the STAR output, including a coordinate-sorted BAM file
 and its index.
 
 ## About
-These workflows are part of [Biowdl](https://biowdl.github.io/)
+These workflows are part of [BioWDL](https://biowdl.github.io/)
 developed by [the SASC team](http://sasc.lumc.nl/).
 
 ## Contact
