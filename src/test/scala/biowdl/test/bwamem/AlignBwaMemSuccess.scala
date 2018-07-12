@@ -34,9 +34,11 @@ import htsjdk.samtools.{
 
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
-  val bamFile: File = new File(outputDir,
+  val bamFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bam")
-  val baiFile: File = new File(outputDir,
+  val baiFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bai")
 
   addMustHaveFile(bamFile)
@@ -47,7 +49,7 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
     val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
 
     val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(
-      s"$sample-$library-$readgroup")
+      s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse()}")
     correctReadgroup.setLibrary(library.get)
     correctReadgroup.setSample(sample.get)
     correctReadgroup.setPlatform(platform.getOrElse("illumina"))
@@ -57,7 +59,8 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
     correctReadgroup.equivalent(
       bamReader.getFileHeader
-        .getReadGroup(s"$sample-$library-$readgroup")) shouldBe true
+        .getReadGroup(s"${sample.getOrElse(None)}-${library
+          .getOrElse(None)}-${readgroup.getOrElse(None)}")) shouldBe true
   }
 
   @Test

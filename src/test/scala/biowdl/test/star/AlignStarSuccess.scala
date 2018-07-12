@@ -33,31 +33,33 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
 
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
-  val bamFile: File = new File(outputDir,
+  val bamFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bam")
-  val baiFile: File = new File(outputDir,
+  val baiFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bai")
 
   addMustHaveFile(bamFile)
   addMustHaveFile(baiFile)
-
-
   @Test
   def testReadgroups(): Unit = {
     val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
 
     val readGroups = bamReader.getFileHeader.getReadGroups
-    readGroups.size shouldBe readgroups.get.size
+    readGroups.size shouldBe readgroups.getOrElse(Nil).size
 
-    readgroups.get.foreach(rg => {
-      val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(rg)
-      correctReadgroup.setPlatform(platform.getOrElse("illumina"))
-      correctReadgroup.setLibrary(library.get)
-      correctReadgroup.setSample(sample.get)
+    readgroups
+      .getOrElse(Nil)
+      .foreach(rg => {
+        val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(rg)
+        correctReadgroup.setPlatform(platform.getOrElse("illumina"))
+        correctReadgroup.setLibrary(library.get)
+        correctReadgroup.setSample(sample.get)
 
-      correctReadgroup
-        .equivalent(bamReader.getFileHeader.getReadGroup(rg)) shouldBe true
-    })
+        correctReadgroup
+          .equivalent(bamReader.getFileHeader.getReadGroup(rg)) shouldBe true
+      })
   }
 
   @Test
