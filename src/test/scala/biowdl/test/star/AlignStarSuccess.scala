@@ -33,10 +33,10 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
 
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
-  val bamFile: File = new File(
-    s"$sample-$library.Aligned.sortedByCoord.out.bam")
-  val baiFile: File = new File(
-    s"$sample-$library.Aligned.sortedByCoord.out.bai")
+  val bamFile: File = new File(outputDir,
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bam")
+  val baiFile: File = new File(outputDir,
+    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bai")
 
   addMustHaveFile(bamFile)
   addMustHaveFile(baiFile)
