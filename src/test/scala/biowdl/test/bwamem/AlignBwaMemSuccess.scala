@@ -34,18 +34,18 @@ import htsjdk.samtools.{
 
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
-  val bamFile: File = new File(outputDir,
+  val bamFile: File = new File(
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bam")
-  val baiFile: File = new File(outputDir,
+  val baiFile: File = new File(
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bai")
 
   addMustHaveFile(bamFile)
   addMustHaveFile(baiFile)
 
-  val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
-
   @Test
   def testReadgroups(): Unit = {
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
     val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(
       s"$sample-$library-$readgroup")
     correctReadgroup.setLibrary(library.get)
@@ -62,6 +62,8 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
   @Test
   def testSortOrder(): Unit = {
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
     bamReader.getFileHeader.getSortOrder shouldBe SAMFileHeader.SortOrder.coordinate
   }
 

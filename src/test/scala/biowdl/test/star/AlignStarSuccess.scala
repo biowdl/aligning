@@ -33,18 +33,19 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
 
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
-  val bamFile: File = new File(outputDir,
+  val bamFile: File = new File(
     s"$sample-$library.Aligned.sortedByCoord.out.bam")
-  val baiFile: File = new File(outputDir,
+  val baiFile: File = new File(
     s"$sample-$library.Aligned.sortedByCoord.out.bai")
 
   addMustHaveFile(bamFile)
   addMustHaveFile(baiFile)
 
-  val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
 
   @Test
   def testReadgroups(): Unit = {
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
     val readGroups = bamReader.getFileHeader.getReadGroups
     readGroups.size shouldBe readgroups.get.size
 
@@ -61,6 +62,8 @@ trait AlignStarSuccess extends AlignStar with PipelineSuccess {
 
   @Test
   def testSortOrder(): Unit = {
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
     bamReader.getFileHeader.getSortOrder shouldBe SAMFileHeader.SortOrder.coordinate
   }
 }
