@@ -50,7 +50,7 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
       s"$sample-$library-$readgroup")
     correctReadgroup.setLibrary(library.get)
     correctReadgroup.setSample(sample.get)
-    correctReadgroup.setPlatform(platform.get)
+    correctReadgroup.setPlatform(platform.getOrElse("illumina"))
 
     val resultReadgroup = bamReader.getFileHeader.getReadGroups
     resultReadgroup.size shouldBe 1
