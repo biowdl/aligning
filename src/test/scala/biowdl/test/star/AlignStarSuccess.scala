@@ -21,12 +21,46 @@
 
 package biowdl.test.star
 
+import java.io.File
+
+import htsjdk.samtools.{
+  SAMFileHeader,
+  SAMReadGroupRecord,
+  SamReader,
+  SamReaderFactory
+}
 import nl.biopet.utils.biowdl.PipelineSuccess
+import org.testng.annotations.Test
 
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
-  addMustHaveFile(
-    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bam")
-  addMustHaveFile(
-    s"${sample.getOrElse(None)}-${library.getOrElse(None)}.Aligned.sortedByCoord.out.bai")
-  //TODO: add tests
+  val bamFile: File = new File(
+    s"$sample-$library.Aligned.sortedByCoord.out.bam")
+  val baiFile: File = new File(
+    s"$sample-$library.Aligned.sortedByCoord.out.bai")
+
+  addMustHaveFile(bamFile)
+  addMustHaveFile(baiFile)
+
+  val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
+  @Test
+  def testReadgroups(): Unit = {
+    val readGroups = bamReader.getFileHeader.getReadGroups
+    readGroups.size shouldBe readgroups.get.size
+
+    readgroups.get.foreach(rg => {
+      val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(rg)
+      correctReadgroup.setPlatform(platform.getOrElse("illumina"))
+      correctReadgroup.setLibrary(library.get)
+      correctReadgroup.setSample(sample.get)
+
+      correctReadgroup
+        .equivalent(bamReader.getFileHeader.getReadGroup(rg)) shouldBe true
+    })
+  }
+
+  @Test
+  def testSortOrder(): Unit = {
+    bamReader.getFileHeader.getSortOrder shouldBe SAMFileHeader.SortOrder.coordinate
+  }
 }
