@@ -33,9 +33,10 @@ import htsjdk.samtools.{
 }
 
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
-  val bamFile: File = new File(
+
+  val bamFile: File = new File(outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bam")
-  val baiFile: File = new File(
+  val baiFile: File = new File(outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bai")
 
   addMustHaveFile(bamFile)
