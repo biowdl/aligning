@@ -26,20 +26,49 @@ import java.io.File
 import nl.biopet.utils.biowdl.fixtureFile
 import nl.biopet.utils.biowdl.references.TestReference
 
-trait AlgignStarSingleEnd extends AlignStarSuccess with TestReference {
-  def sample: Option[String] = Some("wgs1")
-  def library: Option[String] = Some("lib1")
-  def readgroups: Option[List[String]] = Some("rg1" :: Nil)
+trait AlignStarSingleEnd extends AlignStarSuccess with TestReference {
+  override def sample: Option[String] = Some("rna3")
+  override def library: Option[String] = Some("lib1")
+  override def readgroups: Option[List[String]] = Some("rg1" :: Nil)
 
-  def inputR1: Option[List[File]] =
-    Some(fixtureFile("samples", "wgs1", "R1.fq.gz") :: Nil)
-  def inputR2: Option[List[File]] = None
+  override def inputR1: Option[List[File]] =
+    Some(fixtureFile("samples", "rna3", "R1.fq.gz") :: Nil)
+  override def inputR2: Option[List[File]] = None
+
 }
 
-trait AlgignStarPairedEnd extends AlgignStarSingleEnd {
+trait AlignStarPairedEnd extends AlignStarSingleEnd {
   override def inputR2: Option[List[File]] =
-    Some(fixtureFile("samples", "wgs1", "R2.fq.gz") :: Nil)
+    Some(fixtureFile("samples", "rna3", "R2.fq.gz") :: Nil)
 }
 
-class AlgignStarSingleEndTest extends AlgignStarSingleEnd with AlignStarSuccess
-class AlgignStarPairedEndTest extends AlgignStarPairedEnd with AlignStarSuccess
+trait AlignStarMultipleReadgroupsSingleEnd
+    extends AlignStarSuccess
+    with TestReference {
+  override def sample: Option[String] = Some("rna3")
+  override def library: Option[String] = Some("lib1")
+  override def readgroups: Option[List[String]] = Some(List("rg1", "rg2"))
+
+  override def inputR1: Option[List[File]] =
+    Some(
+      List(fixtureFile("samples", "rna3_split", "rg1_1.fq.gz"),
+           fixtureFile("samples", "rna3_split", "rg2_1.fq.gz")))
+  override def inputR2: Option[List[File]] = None
+}
+
+trait AlignStarMultipleReadgroupsPairedEnd
+    extends AlignStarMultipleReadgroupsSingleEnd {
+  override def inputR2: Option[List[File]] =
+    Some(
+      List(fixtureFile("samples", "rna3_split", "rg1_2.fq.gz"),
+           fixtureFile("samples", "rna3_split", "rg2_2.fq.gz")))
+}
+
+class AlignStarSingleEndTest extends AlignStarSingleEnd with AlignStarSuccess
+class AlignStarPairedEndTest extends AlignStarPairedEnd with AlignStarSuccess
+class AlignStarMultipleReadgroupsSingleEndTest
+    extends AlignStarMultipleReadgroupsSingleEnd
+    with AlignStarSuccess
+class AlignStarMultipleReadgroupsPairedEndTest
+    extends AlignStarMultipleReadgroupsPairedEnd
+    with AlignStarSuccess

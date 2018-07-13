@@ -21,19 +21,53 @@
 
 package biowdl.test.bwamem
 
+import java.io.File
+
 import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
+import htsjdk.samtools.{
+  SAMFileHeader,
+  SAMReadGroupRecord,
+  SamReader,
+  SamReaderFactory
+}
 
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
-  addMustHaveFile(
+
+  val bamFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bam")
-  addMustHaveFile(
+  val baiFile: File = new File(
+    outputDir,
     s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}.bai")
 
-  /*
+  addMustHaveFile(bamFile)
+  addMustHaveFile(baiFile)
+
   @Test
   def testReadgroups(): Unit = {
-    ???
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
+    val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(
+      s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse()}")
+    correctReadgroup.setLibrary(library.get)
+    correctReadgroup.setSample(sample.get)
+    correctReadgroup.setPlatform(platform.getOrElse("illumina"))
+
+    val resultReadgroup = bamReader.getFileHeader.getReadGroups
+    resultReadgroup.size shouldBe 1
+
+    correctReadgroup.equivalent(
+      bamReader.getFileHeader
+        .getReadGroup(s"${sample.getOrElse(None)}-${library
+          .getOrElse(None)}-${readgroup.getOrElse(None)}")) shouldBe true
   }
- */
+
+  @Test
+  def testSortOrder(): Unit = {
+    val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+
+    bamReader.getFileHeader.getSortOrder shouldBe SAMFileHeader.SortOrder.coordinate
+  }
+
 }
