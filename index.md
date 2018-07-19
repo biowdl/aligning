@@ -37,7 +37,7 @@ available inputs.
 | sample | `String` | | An identifier for the sample being aligned. |
 | library | `String` | | An identifier for the library being aligned. |
 | readgroup | `String` | | An identifier for the readgroup being aligned. |
-| platform | `String?` | `"\"illumina\""` | The platform used for sequencing. |
+| platform | `String?` | `"illumina"` | The platform used for sequencing. |
 
 >All inputs have to be preceded by with `AlignBwaMem.`.
 Type is indicated according to the WDL data types: `File` should be indicators
@@ -67,7 +67,7 @@ available inputs.
 | sample | `String` | | An identifier for the sample being aligned. |
 | library | `String` | | An identifier for the library being aligned. |
 | readgroups |`Array[String]` | | Readgroup identifiers in the same order as the associated FastQ files in inputR1 and inputR2. |
-| platform | `String?` | `"\"illumina\""` | The platform used for sequencing. |
+| platform | `String?` | `"illumina"` | The platform used for sequencing. |
 
 >All inputs have to be preceded by with `AlignStar.`.
 Type is indicated according to the WDL data types: `File` should be indicators
