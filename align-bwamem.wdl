@@ -1,14 +1,18 @@
+version 1.0
+
 import "tasks/bwa.wdl" as bwa
 import "tasks/samtools.wdl" as samtools
 
 workflow AlignBwaMem {
-    String outputDir
-    String sample
-    String library
-    String readgroup
-    String? platform = "illumina"
-    File inputR1
-    File? inputR2
+    input {
+        String outputDir
+        String sample
+        String library
+        String readgroup
+        String? platform = "illumina"
+        File inputR1
+        File? inputR2
+    }
 
     call bwa.mem as bwaMem {
         input:
