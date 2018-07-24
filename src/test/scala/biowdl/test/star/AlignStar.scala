@@ -39,12 +39,8 @@ trait AlignStar extends Pipeline with Reference {
     super.inputs ++
       Map(
         "AlignStar.outputDir" -> outputDir.getAbsolutePath,
-        "AlignStar.refFasta" -> referenceFasta.getAbsolutePath,
-        "AlignStar.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
-        "AlignStar.refDict" -> referenceFastaDictFile.getAbsolutePath,
         "AlignStar.star.genomeDir" -> starGenomeDir.map(_.getAbsolutePath)
       ) ++
-      sample.map("AlignStar.sample" -> _) ++
       library.map("AlignStar.library" -> _) ++
       readgroups.map("AlignStar.readgroups" -> _) ++
       platform.map("AlignStar.platform" -> _) ++
