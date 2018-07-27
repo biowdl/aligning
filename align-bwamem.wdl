@@ -12,14 +12,18 @@ workflow AlignBwaMem {
         String? platform = "illumina"
         File inputR1
         File? inputR2
+        Array[File] indexFiles
+        File refFasta
     }
 
-    call bwa.mem as bwaMem {
+    call bwa.Mem as bwaMem {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
             outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
-            readgroup = "@RG\\tID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}"
+            readgroup = "@RG\\tID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}",
+            indexFiles = indexFiles,
+            referenceFasta = refFasta
     }
 
     call samtools.Index as samtoolsIndex {
