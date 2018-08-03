@@ -48,7 +48,7 @@ optional, types ending in `+` indicate they require at least one element.
 `align-star.wdl` can be run using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 ```
-java -jar cromwell-<version>.jar run -i inputs.json align-star.wdl.wdl
+java -jar cromwell-<version>.jar run -i inputs.json align-star.wdl
 ```
 
 The inputs JSON can be generated using WOMtools as described in the [WOMtools
@@ -69,7 +69,7 @@ available inputs.
 | readgroups |`Array[String]` | | Readgroup identifiers in the same order as the associated FastQ files in inputR1 and inputR2. |
 | platform | `String?` | `"illumina"` | The platform used for sequencing. |
 
->All inputs have to be preceded by with `AlignStar.`.
+>All inputs have to be preceded by `AlignStar.`.
 Type is indicated according to the WDL data types: `File` should be indicators
 of file location (a string in JSON). Types ending in `?` indicate the input is
 optional, types ending in `+` indicate they require at least one element.
