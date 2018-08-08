@@ -12,8 +12,6 @@ workflow AlignBwaMem {
         String? platform = "illumina"
         File inputR1
         File? inputR2
-        Array[File] indexFiles
-        File refFasta
     }
 
     call bwa.Mem as bwaMem {
