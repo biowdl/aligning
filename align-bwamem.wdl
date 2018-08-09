@@ -14,18 +14,20 @@ workflow AlignBwaMem {
         File? inputR2
     }
 
+    String prefixPath = outputDir + "/" + sample + "-" + library + "-" + readgroup
+
     call bwa.Mem as bwaMem {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
-            outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
+            outputPath = prefixPath + ".bam",
             readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}"
     }
 
     call samtools.Index as samtoolsIndex {
         input:
             bamFilePath = bwaMem.bamFile,
-            bamIndexPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bai"
+            bamIndexPath = prefixPath + ".bai"
     }
 
     output {
