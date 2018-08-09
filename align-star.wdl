@@ -1,14 +1,18 @@
+version 1.0
+
 import "tasks/star.wdl" as star_task
 import "tasks/samtools.wdl" as samtools
 
 workflow AlignStar {
-    Array[File] inputR1
-    Array[File]? inputR2
-    String outputDir
-    String sample
-    String library
-    Array[String] readgroups
-    String? platform = "illumina"
+    input {
+        Array[File] inputR1
+        Array[File]? inputR2
+        String outputDir
+        String sample
+        String library
+        Array[String] readgroups
+        String? platform = "illumina"
+    }
 
     scatter (rg in readgroups) {
         String rgLine =
@@ -20,7 +24,7 @@ workflow AlignStar {
             inputR1 = inputR1,
             inputR2 = inputR2,
             outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
-            outSAMattrRGline = rgLine
+            outSAMattrRGline = rgLine,
     }
 
     call samtools.Index as samtoolsIndex {

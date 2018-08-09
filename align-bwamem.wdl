@@ -1,27 +1,33 @@
+version 1.0
+
 import "tasks/bwa.wdl" as bwa
 import "tasks/samtools.wdl" as samtools
 
 workflow AlignBwaMem {
-    String outputDir
-    String sample
-    String library
-    String readgroup
-    String? platform = "illumina"
-    File inputR1
-    File? inputR2
+    input {
+        String outputDir
+        String sample
+        String library
+        String readgroup
+        String? platform = "illumina"
+        File inputR1
+        File? inputR2
+    }
 
-    call bwa.mem as bwaMem {
+    String prefixPath = outputDir + "/" + sample + "-" + library + "-" + readgroup
+
+    call bwa.Mem as bwaMem {
         input:
             inputR1 = inputR1,
             inputR2 = inputR2,
-            outputPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bam",
-            readgroup = "@RG\\tID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}"
+            outputPath = prefixPath + ".bam",
+            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}"
     }
 
     call samtools.Index as samtoolsIndex {
         input:
             bamFilePath = bwaMem.bamFile,
-            bamIndexPath = outputDir + "/" + sample + "-" + library + "-" + readgroup + ".bai"
+            bamIndexPath = prefixPath + ".bai"
     }
 
     output {

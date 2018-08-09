@@ -39,9 +39,6 @@ trait AlignBwaMem extends Pipeline with Reference {
     super.inputs ++
       Map(
         "AlignBwaMem.outputDir" -> outputDir.getAbsolutePath,
-        "AlignBwaMem.refFasta" -> referenceFasta.getAbsolutePath,
-        "AlignBwaMem.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
-        "AlignBwaMem.refDict" -> referenceFastaDictFile.getAbsolutePath,
         "AlignBwaMem.bwaMem.referenceFasta" -> bwaMemFasta.getOrElse(
           throw new IllegalStateException),
         "AlignBwaMem.bwaMem.indexFiles" -> bwaMemIndexFiles.map(
@@ -51,7 +48,6 @@ trait AlignBwaMem extends Pipeline with Reference {
       library.map("AlignBwaMem.library" -> _) ++
       readgroup.map("AlignBwaMem.readgroup" -> _) ++
       platform.map("AlignBwaMem.platform" -> _) ++
-      sample.map("AlignBwaMem.sample" -> _) ++
       inputR1.map("AlignBwaMem.inputR1" -> _) ++
       inputR2.map("AlignBwaMem.inputR2" -> _)
 
