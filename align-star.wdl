@@ -10,7 +10,6 @@ workflow AlignStar {
         String outputDir
         String sample
         String library
-        String starIndexDir
         Array[String] readgroups
         String? platform = "illumina"
     }
@@ -26,7 +25,6 @@ workflow AlignStar {
             inputR2 = inputR2,
             outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
             outSAMattrRGline = rgLine,
-            genomeDir = starIndexDir
     }
 
     call samtools.Index as samtoolsIndex {
