@@ -39,7 +39,7 @@ trait AlignStar extends Pipeline with Reference {
     super.inputs ++
       Map(
         "AlignStar.outputDir" -> outputDir.getAbsolutePath,
-        "AlignStar.star.genomeDir" -> starGenomeDir.map(_.getAbsolutePath)
+        "AlignStar.starIndexDir" -> starGenomeDir.map(_.getAbsolutePath)
       ) ++
       library.map("AlignStar.library" -> _) ++
       readgroups.map("AlignStar.readgroups" -> _) ++
