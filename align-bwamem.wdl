@@ -11,6 +11,8 @@ workflow AlignBwaMem {
         String readgroup
         String? platform = "illumina"
         File inputR1
+        Array[File] indexFiles
+        File refFasta
         File? inputR2
     }
 
@@ -21,7 +23,9 @@ workflow AlignBwaMem {
             inputR1 = inputR1,
             inputR2 = inputR2,
             outputPath = prefixPath + ".bam",
-            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}"
+            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}",
+            indexFiles = indexFiles,
+            referenceFasta = refFasta
     }
 
     call samtools.Index as samtoolsIndex {
