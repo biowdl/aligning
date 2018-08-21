@@ -2,6 +2,7 @@ version 1.0
 
 import "tasks/bwa.wdl" as bwa
 import "tasks/samtools.wdl" as samtools
+import "tasks/bwa.wdl" as bwa
 
 workflow AlignBwaMem {
     input {
@@ -11,9 +12,8 @@ workflow AlignBwaMem {
         String readgroup
         String? platform = "illumina"
         File inputR1
-        Array[File] indexFiles
-        File refFasta
         File? inputR2
+        BwaIndex bwaIndex
     }
 
     String prefixPath = outputDir + "/" + sample + "-" + library + "-" + readgroup
@@ -24,8 +24,7 @@ workflow AlignBwaMem {
             inputR2 = inputR2,
             outputPath = prefixPath + ".bam",
             readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}",
-            indexFiles = indexFiles,
-            referenceFasta = refFasta
+            bwaIndex = bwaIndex
     }
 
     call samtools.Index as samtoolsIndex {
