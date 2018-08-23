@@ -24,10 +24,9 @@ package biowdl.test.bwamem
 import java.io.File
 
 import nl.biopet.utils.biowdl.fixtureFile
-import nl.biopet.utils.biowdl.references.TestReference
-import nl.biopet.utils.biowdl.samples.{Wgs1PairedEnd, Wgs2PairedEnd}
+import nl.biopet.utils.biowdl.references.TestReferenceAlt
 
-trait AlginBwaMemAltSingleEnd extends AlignBwaMemSuccess with TestReference {
+trait AlginBwaMemAltSingleEnd extends AlignBwaMemSuccess with TestReferenceAlt {
   def sample: Option[String] = Some("wgs1")
   def library: Option[String] = Some("lib1")
   def readgroup: Option[String] = Some("rg1")

@@ -25,7 +25,6 @@ import java.io.File
 
 import nl.biopet.utils.biowdl.fixtureFile
 import nl.biopet.utils.biowdl.references.TestReference
-import nl.biopet.utils.biowdl.samples.{Wgs1PairedEnd, Wgs2PairedEnd}
 
 trait AlginBwaMemSingleEnd extends AlignBwaMemSuccess with TestReference {
   def sample: Option[String] = Some("wgs1")
