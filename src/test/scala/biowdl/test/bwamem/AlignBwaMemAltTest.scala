@@ -35,7 +35,7 @@ trait AlginBwaMemAltSingleEnd extends AlignBwaMemSuccess with TestReferenceAlt {
   def inputR2: Option[File] = None
 }
 
-trait AlginBwaMemAltPairedEnd extends AlginBwaMemSingleEnd {
+trait AlginBwaMemAltPairedEnd extends AlginBwaMemAltSingleEnd {
   override def inputR2: Option[File] =
     Some(fixtureFile("samples", "wgs1", "R2.fq.gz"))
 }
