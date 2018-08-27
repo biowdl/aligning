@@ -2,7 +2,7 @@ version 1.0
 
 import "tasks/bwa.wdl" as bwa
 import "tasks/samtools.wdl" as samtools
-import "tasks/common.wdl"
+import "tasks/common.wdl" as common
 
 workflow AlignBwaMem {
     input {
