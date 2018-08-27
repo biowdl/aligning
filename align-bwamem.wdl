@@ -27,14 +27,8 @@ workflow AlignBwaMem {
             bwaIndex = bwaIndex
     }
 
-    call samtools.Index as samtoolsIndex {
-        input:
-            bamFilePath = bwaMem.bamFile,
-            bamIndexPath = prefixPath + ".bai"
-    }
-
     output {
-        File bamFile = bwaMem.bamFile
-        File bamIndexFile = samtoolsIndex.indexFile
+        File bamFile = bwaMem.bamFile.file
+        File bamIndexFile = bwaMem.bamFile.index
     }
 }
