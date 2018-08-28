@@ -1,4 +1,4 @@
 [submodule "tasks"]
-    branch = develop
+	branch = develop
 	path = tasks
 	url = https://github.com/biowdl/tasks.git
