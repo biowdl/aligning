@@ -24,9 +24,9 @@ package biowdl.test.bwamem
 import java.io.File
 
 import nl.biopet.utils.biowdl.fixtureFile
-import nl.biopet.utils.biowdl.references.TestReference
+import nl.biopet.utils.biowdl.references.TestReferenceAlt
 
-trait AlginBwaMemSingleEnd extends AlignBwaMemSuccess with TestReference {
+trait AlginBwaMemAltSingleEnd extends AlignBwaMemSuccess with TestReferenceAlt {
   def sample: Option[String] = Some("wgs1")
   def library: Option[String] = Some("lib1")
   def readgroup: Option[String] = Some("rg1")
@@ -35,14 +35,14 @@ trait AlginBwaMemSingleEnd extends AlignBwaMemSuccess with TestReference {
   def inputR2: Option[File] = None
 }
 
-trait AlginBwaMemPairedEnd extends AlginBwaMemSingleEnd {
+trait AlginBwaMemAltPairedEnd extends AlginBwaMemAltSingleEnd {
   override def inputR2: Option[File] =
     Some(fixtureFile("samples", "wgs1", "R2.fq.gz"))
 }
 
-class AlginBwaMemSingleEndTest
-    extends AlginBwaMemSingleEnd
+class AlginBwaMemAltSingleEndTest
+    extends AlginBwaMemAltSingleEnd
     with AlignBwaMemSuccess
-class AlginBwaMemPairedEndTest
-    extends AlginBwaMemPairedEnd
+class AlginBwaMemAltPairedEndTest
+    extends AlginBwaMemAltPairedEnd
     with AlignBwaMemSuccess

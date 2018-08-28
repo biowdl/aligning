@@ -1,8 +1,7 @@
 version 1.0
 
 import "tasks/bwa.wdl" as bwa
-import "tasks/samtools.wdl" as samtools
-import "tasks/bwa.wdl" as bwa
+import "tasks/common.wdl" as common
 
 workflow AlignBwaMem {
     input {
@@ -27,14 +26,8 @@ workflow AlignBwaMem {
             bwaIndex = bwaIndex
     }
 
-    call samtools.Index as samtoolsIndex {
-        input:
-            bamFilePath = bwaMem.bamFile,
-            bamIndexPath = prefixPath + ".bai"
-    }
-
     output {
-        File bamFile = bwaMem.bamFile
-        File bamIndexFile = samtoolsIndex.indexFile
+        File bamFile = bwaMem.bamFile.file
+        File bamIndexFile = bwaMem.bamFile.index
     }
 }
