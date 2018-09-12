@@ -2,6 +2,7 @@ version 1.0
 
 import "tasks/star.wdl" as star_task
 import "tasks/samtools.wdl" as samtools
+import "tasks/common.wdl" as common
 
 workflow AlignStar {
     input {
@@ -38,7 +39,6 @@ workflow AlignStar {
     }
 
     output {
-        File bamFile = star.bamFile
-        File bamIndexFile = samtoolsIndex.indexFile
+        IndexedBamFile bamFile = samtoolsIndex.outputBam
     }
 }
