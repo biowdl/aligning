@@ -2,6 +2,7 @@ version 1.0
 
 import "tasks/star.wdl" as star_task
 import "tasks/samtools.wdl" as samtools
+import "tasks/common.wdl" as common
 
 workflow AlignStar {
     input {
@@ -31,14 +32,13 @@ workflow AlignStar {
 
     call samtools.Index as samtoolsIndex {
         input:
-            bamFilePath = star.bamFile,
+            bamFile = star.bamFile,
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
             bamIndexPath = outputDir + "/" + sample + "-" + library +
                 ".Aligned.sortedByCoord.out.bai"
     }
 
     output {
-        File bamFile = star.bamFile
-        File bamIndexFile = samtoolsIndex.indexFile
+        IndexedBamFile bamFile = samtoolsIndex.outputBam
     }
 }

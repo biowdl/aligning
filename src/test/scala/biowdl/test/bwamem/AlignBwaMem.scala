@@ -45,8 +45,8 @@ trait AlignBwaMem extends Pipeline with Reference {
       library.map("AlignBwaMem.library" -> _) ++
       readgroup.map("AlignBwaMem.readgroup" -> _) ++
       platform.map("AlignBwaMem.platform" -> _) ++
-      inputR1.map("AlignBwaMem.inputR1" -> _) ++
-      inputR2.map("AlignBwaMem.inputR2" -> _)
+      inputR1.map(r1 =>
+        "AlignBwaMem.inputFastq" -> (Map("R1" -> r1) ++ inputR2.map("R2" -> _)))
 
   def startFile: File = new File("./align-bwamem.wdl")
 }

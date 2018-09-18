@@ -10,8 +10,7 @@ workflow AlignBwaMem {
         String library
         String readgroup
         String? platform = "illumina"
-        File inputR1
-        File? inputR2
+        FastqPair inputFastq
         BwaIndex bwaIndex
     }
 
@@ -19,15 +18,13 @@ workflow AlignBwaMem {
 
     call bwa.Mem as bwaMem {
         input:
-            inputR1 = inputR1,
-            inputR2 = inputR2,
+            inputFastq = inputFastq,
             outputPath = prefixPath + ".bam",
             readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}",
             bwaIndex = bwaIndex
     }
 
     output {
-        File bamFile = bwaMem.bamFile.file
-        File bamIndexFile = bwaMem.bamFile.index
+        IndexedBamFile bamFile = bwaMem.bamFile
     }
 }
