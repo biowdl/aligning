@@ -1,4 +1,4 @@
-name: multsample
+name: aligning
 channels:
   - bioconda
   - conda-forge
