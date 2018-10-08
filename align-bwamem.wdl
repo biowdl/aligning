@@ -20,7 +20,7 @@ workflow AlignBwaMem {
         input:
             inputFastq = inputFastq,
             outputPath = prefixPath + ".bam",
-            readgroup = "@RG\tID:${sample}-${library}-${readgroup}\tSM:${sample}\tLB:${library}\tPL:${platform}",
+            readgroup = "@RG\\tID:${sample}-${library}-${readgroup}\\tSM:${sample}\\tLB:${library}\\tPL:${platform}",
             bwaIndex = bwaIndex
     }
 
