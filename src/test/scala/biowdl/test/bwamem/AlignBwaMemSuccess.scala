@@ -54,10 +54,15 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
     val readgroups = header.getReadGroups
     readgroups.size() shouldBe 1
 
-    readgroups.headOption.map(_.getSample) shouldBe sample
-    readgroups.headOption.map(_.getLibrary) shouldBe library
-    readgroups.headOption.map(_.getReadGroupId) shouldBe s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}"
-    readgroups.headOption.map(_.getPlatform) shouldBe platform
+    (readgroups.headOption, sample, library, readgroup) match {
+      case (Some(readgroup), Some(sm), Some(lb), Some(rg)) =>
+        readgroup.getSample shouldBe sm
+        readgroup.getLibrary shouldBe lb
+        readgroup.getReadGroupId shouldBe s"$sm-$lb-$rg"
+        readgroup.getPlatform shouldBe platform.getOrElse("illumina")
+      case (None, _, _, _) => throw new IllegalStateException("No readgroup found")
+      case _ => throw new IllegalStateException("sample, library or readgroup is missing in this class")
+    }
   }
 
   @Test
