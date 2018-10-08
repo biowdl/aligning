@@ -56,7 +56,7 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
     readgroups.headOption.map(_.getSample) shouldBe sample
     readgroups.headOption.map(_.getLibrary) shouldBe library
-    readgroups.headOption.map(_.getReadGroupId) shouldBe readgroup
+    readgroups.headOption.map(_.getReadGroupId) shouldBe s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse(None)}"
     readgroups.headOption.map(_.getPlatform) shouldBe platform
   }
 
