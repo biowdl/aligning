@@ -60,8 +60,11 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
         readgroup.getLibrary shouldBe lb
         readgroup.getReadGroupId shouldBe s"$sm-$lb-$rg"
         readgroup.getPlatform shouldBe platform.getOrElse("illumina")
-      case (None, _, _, _) => throw new IllegalStateException("No readgroup found")
-      case _ => throw new IllegalStateException("sample, library or readgroup is missing in this class")
+      case (None, _, _, _) =>
+        throw new IllegalStateException("No readgroup found")
+      case _ =>
+        throw new IllegalStateException(
+          "sample, library or readgroup is missing in this class")
     }
   }
 

@@ -56,12 +56,12 @@ trait AlignStarSuccess extends AlignStar with PipelineSuccess {
 
     readgroups
       .getOrElse(Nil)
-      .foreach(rg => {
+      .foreach { rg =>
         val readgroup = header.getReadGroup(rg)
         readgroup.getSample shouldBe sample
         readgroup.getLibrary shouldBe library
         readgroup.getPlatform shouldBe platform
-      })
+      }
   }
 
   @Test
