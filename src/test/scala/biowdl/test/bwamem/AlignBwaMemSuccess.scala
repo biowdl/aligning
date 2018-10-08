@@ -32,6 +32,8 @@ import htsjdk.samtools.{
   SamReaderFactory
 }
 
+import scala.collection.JavaConversions._
+
 trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
 
   val bamFile: File = new File(
@@ -47,20 +49,23 @@ trait AlignBwaMemSuccess extends AlignBwaMem with PipelineSuccess {
   @Test
   def testReadgroups(): Unit = {
     val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
+    val header = bamReader.getFileHeader
+    bamReader.close()
+    val readgroups = header.getReadGroups
+    readgroups.size() shouldBe 1
 
-    val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(
-      s"${sample.getOrElse(None)}-${library.getOrElse(None)}-${readgroup.getOrElse()}")
-    correctReadgroup.setLibrary(library.get)
-    correctReadgroup.setSample(sample.get)
-    correctReadgroup.setPlatform(platform.getOrElse("illumina"))
-
-    val resultReadgroup = bamReader.getFileHeader.getReadGroups
-    resultReadgroup.size shouldBe 1
-
-    correctReadgroup.equivalent(
-      bamReader.getFileHeader
-        .getReadGroup(s"${sample.getOrElse(None)}-${library
-          .getOrElse(None)}-${readgroup.getOrElse(None)}")) shouldBe true
+    (readgroups.headOption, sample, library, readgroup) match {
+      case (Some(readgroup), Some(sm), Some(lb), Some(rg)) =>
+        readgroup.getSample shouldBe sm
+        readgroup.getLibrary shouldBe lb
+        readgroup.getReadGroupId shouldBe s"$sm-$lb-$rg"
+        readgroup.getPlatform shouldBe platform.getOrElse("illumina")
+      case (None, _, _, _) =>
+        throw new IllegalStateException("No readgroup found")
+      case _ =>
+        throw new IllegalStateException(
+          "sample, library or readgroup is missing in this class")
+    }
   }
 
   @Test

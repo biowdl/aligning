@@ -32,6 +32,8 @@ import htsjdk.samtools.{
 import nl.biopet.utils.biowdl.PipelineSuccess
 import org.testng.annotations.Test
 
+import scala.collection.JavaConversions._
+
 trait AlignStarSuccess extends AlignStar with PipelineSuccess {
   val bamFile: File = new File(
     outputDir,
@@ -42,24 +44,24 @@ trait AlignStarSuccess extends AlignStar with PipelineSuccess {
 
   addMustHaveFile(bamFile)
   addMustHaveFile(baiFile)
+
   @Test
   def testReadgroups(): Unit = {
     val bamReader: SamReader = SamReaderFactory.makeDefault().open(bamFile)
 
-    val readGroups = bamReader.getFileHeader.getReadGroups
-    readGroups.size shouldBe readgroups.getOrElse(Nil).size
+    val header = bamReader.getFileHeader
+    bamReader.close()
+
+    header.getReadGroups.size shouldBe readgroups.getOrElse(Nil).size
 
     readgroups
       .getOrElse(Nil)
-      .foreach(rg => {
-        val correctReadgroup: SAMReadGroupRecord = new SAMReadGroupRecord(rg)
-        correctReadgroup.setPlatform(platform.getOrElse("illumina"))
-        correctReadgroup.setLibrary(library.get)
-        correctReadgroup.setSample(sample.get)
-
-        correctReadgroup
-          .equivalent(bamReader.getFileHeader.getReadGroup(rg)) shouldBe true
-      })
+      .foreach { rg =>
+        val readgroup = header.getReadGroup(rg)
+        Option(readgroup.getSample) shouldBe sample
+        Option(readgroup.getLibrary) shouldBe library
+        readgroup.getPlatform shouldBe platform.getOrElse("illumina")
+      }
   }
 
   @Test
