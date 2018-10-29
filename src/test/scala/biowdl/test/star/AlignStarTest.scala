@@ -51,8 +51,8 @@ trait AlignStarMultipleReadgroupsSingleEnd
 
   override def inputR1: Option[List[File]] =
     Some(
-      List(fixtureFile("samples", "rna3_split", "rg1_1.fq.gz"),
-           fixtureFile("samples", "rna3_split", "rg2_1.fq.gz")))
+      List(fixtureFile("samples", "rna3", "rg1_1.fq.gz"),
+           fixtureFile("samples", "rna3", "rg2_1.fq.gz")))
   override def inputR2: Option[List[File]] = None
 }
 
@@ -60,8 +60,8 @@ trait AlignStarMultipleReadgroupsPairedEnd
     extends AlignStarMultipleReadgroupsSingleEnd {
   override def inputR2: Option[List[File]] =
     Some(
-      List(fixtureFile("samples", "rna3_split", "rg1_2.fq.gz"),
-           fixtureFile("samples", "rna3_split", "rg2_2.fq.gz")))
+      List(fixtureFile("samples", "rna3", "rg1_2.fq.gz"),
+           fixtureFile("samples", "rna3", "rg2_2.fq.gz")))
 }
 
 class AlignStarSingleEndTest extends AlignStarSingleEnd with AlignStarSuccess
