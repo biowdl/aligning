@@ -39,10 +39,10 @@ trait AlginBwaMemAltPairedEnd extends AlginBwaMemAltSingleEnd {
   override def inputR2: Option[File] =
     Some(fixtureFile("samples", "wgs1", "R2.fq.gz"))
 }
-
-class AlginBwaMemAltSingleEndTest
-    extends AlginBwaMemAltSingleEnd
-    with AlignBwaMemSuccess
-class AlginBwaMemAltPairedEndTest
-    extends AlginBwaMemAltPairedEnd
-    with AlignBwaMemSuccess
+// Comment out code that tests alt configs
+//class AlginBwaMemAltSingleEndTest
+//    extends AlginBwaMemAltSingleEnd
+//    with AlignBwaMemSuccess
+//class AlginBwaMemAltPairedEndTest
+//    extends AlginBwaMemAltPairedEnd
+//    with AlignBwaMemSuccess
