@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Home
-version: v0.1
-latest: true
+version: develop
+latest: false
 ---
 
 This repository contains a collection of [BioWDL](https://github.com/biowdl)
