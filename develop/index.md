@@ -11,7 +11,6 @@ two workflows available:
 - [align-bwamem.wdl](./align-bwamem.html): Uses BWA mem to align DNA.
 - [align-star.wdl](./align-star.html): Uses STAR to align RNA.
 
-## About
 These workflows are part of [BioWDL](https://biowdl.github.io/)
 developed by [the SASC team](http://sasc.lumc.nl/).
 
