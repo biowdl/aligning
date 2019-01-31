@@ -1,5 +1,0 @@
-{
-  "default_runtime_attributes": {
-    "docker_user": "travis"
-  }
-}
