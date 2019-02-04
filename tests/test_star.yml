@@ -5,7 +5,7 @@
     bash -c '
     TEST_JSON=tests/integration/AlignStarPairedEnd.json ;
     sed -i "2i\"AlignStar.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell -Dconfig.file=tests/cromwell_config/docker.conf run -i $TEST_JSON align-star.wdl'
+    cromwell run -i $TEST_JSON align-star.wdl'
   files:
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bam"
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bai"
@@ -17,7 +17,7 @@
     bash -c '
     TEST_JSON=tests/integration/AlignStarSingleEnd.json ;
     sed -i "2i\"AlignStar.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell -Dconfig.file=tests/cromwell_config/docker.conf run -i $TEST_JSON align-star.wdl'
+    cromwell run -i $TEST_JSON align-star.wdl'
   files:
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bam"
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bai"
