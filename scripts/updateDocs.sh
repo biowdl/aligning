@@ -47,7 +47,7 @@ grep 'latest:' < _config.yml
 # commit and push
 echo "committing and pushing"
 git add ${VERSION}/* _config.yml docs/*
-git commit -m "update documention for version ${VERSION}"
+git commit -m "update documentation for version ${VERSION}"
 git push origin gh-pages
 
 # switch back to version

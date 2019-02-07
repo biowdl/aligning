@@ -6,17 +6,21 @@ latest: false
 ---
 
 This repository contains a collection of [BioWDL](https://github.com/biowdl)
-workflows which can be used for aligning sequencing data. There are currently
-two workflows available:
-- [align-bwamem.wdl](./align-bwamem.html): Uses BWA mem to align DNA.
+workflows which can be used for aligning sequencing data. There is currently
+one workflow available:
 - [align-star.wdl](./align-star.html): Uses STAR to align RNA.
 
 These workflows are part of [BioWDL](https://biowdl.github.io/)
 developed by [the SASC team](http://sasc.lumc.nl/).
 
 ## Dependency requirements and tool versions
-Included in the repository is an `environment.yml` file. This file includes
-all the tool version on which the workflow was tested. You can use conda and
+These workflow can be run through [cromwell](https://cromwell.readthedocs.io/en/stable/)
+and have been configured to automatically use docker containers if
+the cromwell backend allows for this. All dependencies (besides cromwell) should,
+therefore, automatically be obtained by cromwell.
+
+Additionally, included in the repository is an `environment.yml` file. This file includes
+all the tool versions on which the workflow was tested. You can use conda and
 this file to create an environment with all the correct tools.
 
 ## Contact
