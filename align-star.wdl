@@ -14,6 +14,8 @@ workflow AlignStar {
         Array[String] readgroups
         String? platform = "illumina"
         String starIndexDir
+
+        Map[String, String] dockerTags = {"star": "2.6.0c--0", "samtools": "1.8--h46bd0b3_5"}
     }
 
     scatter (rg in readgroups) {
@@ -27,7 +29,8 @@ workflow AlignStar {
             inputR2 = inputR2,
             outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
             outSAMattrRGline = rgLine,
-            genomeDir = starIndexDir
+            genomeDir = starIndexDir,
+            dockerTag = dockerTags["star"]
     }
 
     call samtools.Index as samtoolsIndex {
@@ -35,7 +38,8 @@ workflow AlignStar {
             bamFile = star.bamFile,
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
             bamIndexPath = outputDir + "/" + sample + "-" + library +
-                ".Aligned.sortedByCoord.out.bai"
+                ".Aligned.sortedByCoord.out.bai",
+            dockerTag = dockerTags["samtools"]
     }
 
     output {

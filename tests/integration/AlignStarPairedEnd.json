@@ -1,0 +1,12 @@
+{
+  "AlignStar.starIndexDir":"tests/data/star_index",
+  "AlignStar.inputR1": ["tests/data/rna3/R1.fq.gz", "tests/data/rna3/R1.fq.gz"],
+  "AlignStar.inputR2": ["tests/data/rna3/R2.fq.gz", "tests/data/rna3/R2.fq.gz"],
+  "AlignStar.sample": "rna3",
+  "AlignStar.library": "lib",
+  "AlignStar.readgroups": ["rg1", "rg2"],
+  "AlignStar.dockerTags": {
+    "star": "2.6.0c--0",
+    "samtools": "1.8--h46bd0b3_5"
+  }
+}
