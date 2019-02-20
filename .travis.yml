@@ -29,12 +29,14 @@ install:
   - python3 -m pip install pytest-workflow
 
 script:
-  - python3 -m pytest --basetemp ~/biowdl-test --tag $TEST
+  - python3 -m pytest --tag $TEST
 
 matrix:
   include:
     - env: TEST=align-star_paired_end
     - env: TEST=align-star_single_end
+    - env: TEST=align-hisat2_paired_end
+    - env: TEST=align-hisat2_single_end
     # Below is for testing if all files are valid and if all submodules are up to date.
     - env: TEST=Womtool validate and submodule up to date
       install:
