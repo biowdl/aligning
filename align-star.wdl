@@ -13,7 +13,7 @@ workflow AlignStar {
         String library
         Array[String] readgroups
         String? platform = "illumina"
-        String starIndexDir
+        File starIndexDir
 
         Map[String, String] dockerTags = {"star": "2.6.0c--0", "samtools": "1.8--h46bd0b3_5"}
     }
