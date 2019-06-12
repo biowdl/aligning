@@ -43,6 +43,9 @@ workflow AlignStar {
     }
 
     output {
-        IndexedBamFile bamFile = samtoolsIndex.outputBam
+        IndexedBamFile bamFile = {
+            "file": samtoolsIndex.indexedBam,
+            "index": samtoolsIndex.index
+        }
     }
 }

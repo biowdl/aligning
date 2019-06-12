@@ -45,14 +45,10 @@ workflow AlignHisat2 {
             dockerTag = dockerTags["samtools"]
     }
 
-    call samtools.Index as samtoolsIndex {
-        input:
-            bamFile = samtoolsMerge.outputBam,
-            bamIndexPath = outputDir + "/" + sample + "-" + library + ".bai",
-            dockerTag = dockerTags["samtools"]
-    }
-
     output {
-        IndexedBamFile bamFile = samtoolsIndex.outputBam
+        IndexedBamFile bamFile = {
+            "file": samtoolsMerge.outputBam,
+            "index": samtoolsMerge.outputBamIndex
+        }
     }
 }
