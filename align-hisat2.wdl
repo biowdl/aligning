@@ -12,7 +12,6 @@ workflow AlignHisat2 {
         String library
         Array[String] readgroups
         String? platform = "illumina"
-        File indexDirectory
         String indexBasename
 
         Map[String, String] dockerTags = {"hisat2": "2388ff67fc407dad75774291ca5038f40cac4be0-0",
@@ -25,7 +24,6 @@ workflow AlignHisat2 {
 
         call hisat2Task.Hisat2 as hisat2 {
             input:
-                indexDirectory = indexDirectory,
                 indexBasename = indexBasename,
                 inputR1 = reads.R1,
                 inputR2 = reads.R2,
