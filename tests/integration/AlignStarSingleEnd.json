@@ -1,5 +1,14 @@
 {
-  "AlignStar.starIndexDir":"tests/data/star_index",
+  "AlignStar.starIndexDir": [
+    "tests/data/star_index/chrLength.txt",
+    "tests/data/star_index/chrName.txt",
+    "tests/data/star_index/chrNameLength.txt",
+    "tests/data/star_index/chrStart.txt",
+    "tests/data/star_index/Genome",
+    "tests/data/star_index/genomeParameters.txt",
+    "tests/data/star_index/SA",
+    "tests/data/star_index/SAindex"
+  ],
   "AlignStar.inputR1": ["tests/data/rna3/R1.fq.gz", "tests/data/rna3/R1.fq.gz"],
   "AlignStar.sample": "rna3",
   "AlignStar.library": "lib",
