@@ -1,5 +1,5 @@
 {
-  "AlignStar.starIndexDir": [
+  "AlignStar.indexFiles": [
     "tests/data/star_index/chrLength.txt",
     "tests/data/star_index/chrName.txt",
     "tests/data/star_index/chrNameLength.txt",
