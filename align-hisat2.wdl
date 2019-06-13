@@ -12,7 +12,7 @@ workflow AlignHisat2 {
         String library
         Array[String] readgroups
         String? platform = "illumina"
-        Array[File] indexFiles
+        Array[File]+ indexFiles
 
         Map[String, String] dockerTags = {"hisat2": "2388ff67fc407dad75774291ca5038f40cac4be0-0",
             "samtools": "1.8--h46bd0b3_5"}
