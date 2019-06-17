@@ -9,6 +9,14 @@
   "AlignHisat2.sample": "rna3",
   "AlignHisat2.library": "lib",
   "AlignHisat2.readgroups": ["rg1", "rg2"],
-  "AlignHisat2.indexDirectory": "tests/data/hisat2_index",
-  "AlignHisat2.indexBasename": "reference"
+  "AlignHisat2.indexFiles": [
+    "tests/data/hisat2_index/reference.1.ht2",
+    "tests/data/hisat2_index/reference.2.ht2",
+    "tests/data/hisat2_index/reference.3.ht2",
+    "tests/data/hisat2_index/reference.4.ht2",
+    "tests/data/hisat2_index/reference.5.ht2",
+    "tests/data/hisat2_index/reference.6.ht2",
+    "tests/data/hisat2_index/reference.7.ht2",
+    "tests/data/hisat2_index/reference.8.ht2"
+  ]
 }

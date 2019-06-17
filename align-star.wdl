@@ -6,14 +6,14 @@ import "tasks/common.wdl" as common
 
 workflow AlignStar {
     input {
-        Array[File] inputR1
+        Array[File]+ inputR1
         Array[File]? inputR2
         String outputDir
         String sample
         String library
         Array[String] readgroups
         String? platform = "illumina"
-        File starIndexDir
+        Array[File]+ indexFiles
 
         Map[String, String] dockerTags = {"star": "2.6.0c--0", "samtools": "1.8--h46bd0b3_5"}
     }
@@ -29,7 +29,7 @@ workflow AlignStar {
             inputR2 = inputR2,
             outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
             outSAMattrRGline = rgLine,
-            genomeDir = starIndexDir,
+            indexFiles = indexFiles,
             dockerTag = dockerTags["star"]
     }
 
@@ -43,6 +43,9 @@ workflow AlignStar {
     }
 
     output {
-        IndexedBamFile bamFile = samtoolsIndex.outputBam
+        IndexedBamFile bamFile = {
+            "file": samtoolsIndex.indexedBam,
+            "index": samtoolsIndex.index
+        }
     }
 }
