@@ -15,7 +15,10 @@ workflow AlignStar {
         String? platform = "illumina"
         Array[File]+ indexFiles
 
-        Map[String, String] dockerTags = {"star": "2.6.0c--0", "samtools": "1.8--h46bd0b3_5"}
+        Map[String, String] dockerImages = {
+            "star": "quay.io/biocontainers/star:2.6.0c--0",
+            "samtools": "quay.io/biocontainers/samtools:1.8--h46bd0b3_5"
+        }
     }
 
     scatter (rg in readgroups) {
@@ -30,7 +33,7 @@ workflow AlignStar {
             outFileNamePrefix = outputDir + "/" + sample + "-" + library + ".",
             outSAMattrRGline = rgLine,
             indexFiles = indexFiles,
-            dockerTag = dockerTags["star"]
+            dockerImage = dockerImages["star"]
     }
 
     call samtools.Index as samtoolsIndex {
@@ -39,7 +42,7 @@ workflow AlignStar {
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
             bamIndexPath = outputDir + "/" + sample + "-" + library +
                 ".Aligned.sortedByCoord.out.bai",
-            dockerTag = dockerTags["samtools"]
+            dockerImage = dockerImages["samtools"]
     }
 
     output {
