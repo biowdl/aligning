@@ -8,7 +8,7 @@ workflow AlignStar {
     input {
         Array[File]+ inputR1
         Array[File]? inputR2
-        String outputDir
+        String outputDir = "."
         String sample
         String library
         Array[String] readgroups

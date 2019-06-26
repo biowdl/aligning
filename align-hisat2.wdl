@@ -7,7 +7,7 @@ import "tasks/samtools.wdl" as samtools
 workflow AlignHisat2 {
     input {
         Array[FastqPair]+ inputReads # Using a struct here makes scattering easier
-        String outputDir
+        String outputDir = "."
         String sample
         String library
         Array[String] readgroups
