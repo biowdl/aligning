@@ -40,8 +40,8 @@ workflow AlignStar {
         input:
             bamFile = star.bamFile,
             # This will only work if star.outSAMtype == "BAM SortedByCoordinate"
-            bamIndexPath = outputDir + "/" + sample + "-" + library +
-                ".Aligned.sortedByCoord.out.bai",
+            outputBamPath = outputDir + "/" + sample + "-" + library +
+                ".Aligned.sortedByCoord.out.bam",
             dockerImage = dockerImages["samtools"]
     }
 
