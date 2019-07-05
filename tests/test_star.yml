@@ -1,11 +1,9 @@
 - name: "align-star_paired_end"
   tags:
     - "integration"
-  command: >
-    bash -c '
-    TEST_JSON=tests/integration/AlignStarPairedEnd.json ;
-    sed -i "2i\"AlignStar.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON align-star.wdl'
+  command: >-
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/AlignStarPairedEnd.json align-star.wdl
   files:
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bam"
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bai"
@@ -13,11 +11,9 @@
 - name: "align-star_single_end"
   tags:
     - "integration"
-  command: >
-    bash -c '
-    TEST_JSON=tests/integration/AlignStarSingleEnd.json ;
-    sed -i "2i\"AlignStar.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON align-star.wdl'
+  command: >-
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/AlignStarSingleEnd.json align-star.wdl
   files:
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bam"
     - path: "test-output/rna3-lib.Aligned.sortedByCoord.out.bai"

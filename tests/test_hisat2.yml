@@ -1,11 +1,9 @@
 - name: "align-hisat2_paired_end"
   tags:
     - "integration"
-  command: >
-    bash -c '
-    TEST_JSON=tests/integration/AlignHisat2PairedEnd.json ;
-    sed -i "2i\"AlignHisat2.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON align-hisat2.wdl'
+  command: >-
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/AlignHisat2PairedEnd.json align-hisat2.wdl
   files:
     - path: "test-output/rna3-lib.bam"
     - path: "test-output/rna3-lib.bai"
@@ -13,11 +11,9 @@
 - name: "align-hisat2_single_end"
   tags:
     - "integration"
-  command: >
-    bash -c '
-    TEST_JSON=tests/integration/AlignHisat2SingleEnd.json ;
-    sed -i "2i\"AlignHisat2.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON align-hisat2.wdl'
+  command: >-
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/AlignHisat2SingleEnd.json align-hisat2.wdl
   files:
     - path: "test-output/rna3-lib.bam"
     - path: "test-output/rna3-lib.bai"
