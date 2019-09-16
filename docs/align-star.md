@@ -1,8 +1,6 @@
 ---
 layout: default
 title: align-star
-version: develop
-latest: false
 ---
 
 This workflow uses STAR to map RNA sequencing data to a reference genome.
@@ -30,7 +28,7 @@ about pipeline inputs.
   "AlignStar.outputDir": "The path to the output directory",
   "AlignStar.inputR1": "A list of first-end fastq files (in the same order as the associated readgroup identifiers)",
   "AlignStar.inputR2": "A list of second-end fastq files (in the same order as the associated readgroup identifiers). This input may be ignored for single-end sequencing experiments",
-  "AlignStar.starIndexDir": "The path to the STAR index"
+  "AlignStar.indexFiles": "The paths to the STAR index files."
 }
 ```
 
@@ -61,8 +59,17 @@ Some additional inputs which may be of interest are:
     "/home/user/data/patient1/lane1_R2.fq.gz",
     "/home/user/data/patient1/lane2_R2.fq.gz"
   ],
-  "AlignStar.starIndexDir": "/home/user/genomes/human/star",
-  "AlignStar.star.runThreadN": "The number of threads to be used, defaults to 1",
+  "AlignStar.indexFiles": [
+    "/star_index/chrLength.txt",
+    "/star_index/chrName.txt",
+    "/star_index/chrNameLength.txt",
+    "/star_index/chrStart.txt",
+    "/star_index/Genome",
+    "/star_index/genomeParameters.txt",
+    "/star_index/SA",
+    "/star_index/SAindex"
+  ],
+  "AlignStar.star.runThreadN": 4
 }
 ```
 

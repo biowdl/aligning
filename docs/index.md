@@ -1,14 +1,13 @@
 ---
 layout: default
 title: Home
-version: develop
-latest: false
 ---
 
 This repository contains a collection of [BioWDL](https://github.com/biowdl)
 workflows which can be used for aligning sequencing data. There is currently
 one workflow available:
 - [align-star.wdl](./align-star.html): Uses STAR to align RNA.
+- [align-hisat2.wdl](./align-hisat2.html): Uses HISAT2 to align RNA.
 
 These workflows are part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team at [Leiden University Medical Center](https://www.lumc.nl/).
