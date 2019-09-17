@@ -11,4 +11,4 @@ that users understand how the changes affect the new version.
 
 version 1.0.0-dev
 ---------------------------
-+ <a change>
++ added documentation on the hisat2 workflow
