@@ -12,15 +12,18 @@ one workflow available:
 These workflows are part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team at [Leiden University Medical Center](https://www.lumc.nl/).
 
-## Dependency requirements and tool versions
-These workflow can be run through [cromwell](https://cromwell.readthedocs.io/en/stable/)
-and have been configured to automatically use docker containers if
-the cromwell backend allows for this. All dependencies (besides cromwell) should,
-therefore, automatically be obtained by cromwell.
+### Dependency requirements and tool versions
+Biowdl pipelines use docker images to ensure  reproducibility. This
+means that biowdl pipelines will run on any system that has docker
+installed. Alternatively they can be run with singularity.
 
-Additionally, included in the repository is an `environment.yml` file. This file includes
-all the tool versions on which the workflow was tested. You can use conda and
-this file to create an environment with all the correct tools.
+For more advanced configuration of docker or singularity please check
+the [cromwell documentation on containers](
+https://cromwell.readthedocs.io/en/stable/tutorials/Containers/).
+
+Images from [biocontainers](https://biocontainers.pro) are preferred for
+biowdl pipelines. The list of default images for this pipeline can be
+found in the default for the `dockerImages` input.
 
 ## Contact
 <p>
