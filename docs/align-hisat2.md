@@ -1,6 +1,6 @@
 ---
 layout: default
-title: align-star
+title: align-hisat2
 ---
 
 This workflow uses HISAT2 to map RNA sequencing data to a reference genome.
