@@ -11,7 +11,7 @@ workflow AlignHisat2 {
         String sample
         String library
         Array[String] readgroups
-        String? platform = "illumina"
+        String platform = "illumina"
         Array[File]+ indexFiles
 
         Map[String, String] dockerImages = {
